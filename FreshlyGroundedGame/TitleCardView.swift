@@ -45,6 +45,9 @@ struct TitleCardView: View {
 struct TitleCardView_Previews: PreviewProvider {
     static var previews: some View {
         TitleCardView()
+            .previewDisplayName("Title Card")
+            .previewLayout(.sizeThatFits)
+            .padding()
     }
 }
 
