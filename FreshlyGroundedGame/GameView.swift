@@ -29,6 +29,10 @@ struct GameView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Text("\(game.currentQuestionNumber())/\(game.totalQuestionCount())")
                 }
+                ToolbarItem(placement: .principal) {
+                    FGLogo()
+                        .frame(width: 80)
+                }
                 ToolbarItem(placement: .bottomBar) {
                     Button {
                         game.nextQuestion()
@@ -41,6 +45,7 @@ struct GameView: View {
             .foregroundColor(.white)
             .navigationTitle("LOGO")
             .navigationBarTitleDisplayMode(.inline)
+            .preferredColorScheme(.dark)
         }
 
     }
