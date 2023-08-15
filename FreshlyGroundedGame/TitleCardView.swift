@@ -11,10 +11,11 @@ struct TitleCardView: View {
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 16)
-                .fill(Color.black)
+                .fill(Color("Lead"))
                 .shadow(radius: 5)
 
             VStack {
+                Spacer()
                 FGLogo()
                     .frame(width: 140, height: 100)
 
@@ -22,6 +23,14 @@ struct TitleCardView: View {
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .multilineTextAlignment(.center)
+                Spacer()
+                Text("Swipe to open up".uppercased())
+                    .font(.title2)
+                    .fontWeight(.bold)
+                    .foregroundColor(.purple)
+                    .multilineTextAlignment(.center)
+                // TODO: Add animation to swipe text
+                Spacer()
             }
             .foregroundColor(.white)
             .padding(40)
