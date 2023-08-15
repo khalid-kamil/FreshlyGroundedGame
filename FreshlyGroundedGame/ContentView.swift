@@ -8,9 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    let howToPlay: String = "Be vulnerable. Don't judge."
-    let questions: [Card] = Deck.defaultDeck
-    let currentQuestionIndex: Int = 2
+    @ObservedObject var game = Game()
 
     var body: some View {
         NavigationStack {
@@ -23,9 +21,10 @@ struct ContentView: View {
                     .stroke(Color.black, lineWidth: 1)
                     .padding(16)
 
-                Text(questions[0].prompt.uppercased())
+                Text(game.currentQuestion.uppercased())
                     .font(.headline)
                     .multilineTextAlignment(.center)
+                    .foregroundColor(.black)
                     .padding(40)
             }
             .padding(32)
@@ -33,18 +32,18 @@ struct ContentView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button {
-                        print("Restart")
+                        game.startNewGame()
                     } label: {
                         Image(systemName: "arrow.clockwise")
                     }
 
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Text("\(currentQuestionIndex)/\(questions.count)")
+                    Text("\(game.currentQuestionNumber())/\(game.totalQuestionCount())")
                 }
                 ToolbarItem(placement: .bottomBar) {
                     Button {
-                        print("Next Question")
+                        game.nextQuestion()
                     } label: {
                         Text("Next Question")
                     }
