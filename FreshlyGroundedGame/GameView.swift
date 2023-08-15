@@ -15,26 +15,8 @@ struct GameView: View {
             ZStack {
                 LinearGradient(colors: [Color("Inside"), Color("Oregon Grape")], startPoint: .bottom, endPoint: .top)
                     .ignoresSafeArea()
-                ZStack {
-                    RoundedRectangle(cornerRadius: 16)
-                        .fill(Color.white)
-                        .shadow(radius: 5)
-
-                    RoundedRectangle(cornerRadius: 8)
-                        .stroke(Color.black, lineWidth: 1)
-                        .padding(16)
-
-                    Text(game.currentQuestion.uppercased())
-                        .font(.headline)
-                        .multilineTextAlignment(.center)
-                        .foregroundColor(.black)
-                        .padding(40)
-                }
-                .padding(32)
-                .aspectRatio(1.0, contentMode: .fit)
-
+                CardView(content: game.currentQuestion)
             }
-
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button {
@@ -56,6 +38,7 @@ struct GameView: View {
 
                 }
             }
+            .foregroundColor(.white)
             .navigationTitle("LOGO")
             .navigationBarTitleDisplayMode(.inline)
         }
