@@ -15,7 +15,9 @@ struct GameView: View {
             ZStack {
                 LinearGradient(colors: [Color("Inside"), Color("Oregon Grape")], startPoint: .bottom, endPoint: .top)
                     .ignoresSafeArea()
-                CardView(content: game.currentQuestion)
+                ForEach(game.deck, id: \.self) { question in
+                    CardView(content: question.prompt)
+                }
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {

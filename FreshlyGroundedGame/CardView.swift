@@ -10,6 +10,8 @@ import SwiftUI
 struct CardView: View {
     let content: String
 
+    @State private var dragAmount = CGSize.zero
+
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 16)
@@ -28,6 +30,29 @@ struct CardView: View {
         }
         .padding(32)
         .aspectRatio(1.0, contentMode: .fit)
+        .offset(x: dragAmount.width, y: dragAmount.height * 0.3)
+        .rotationEffect(.degrees(Double(dragAmount.width / 40)))
+        .gesture(
+            DragGesture()
+                .onChanged { dragAmount = $0.translation }
+                .onEnded({ _ in
+                    swipeCard(width: dragAmount.width)
+                })
+        )
+        .animation(.spring(), value: dragAmount)
+    }
+
+    func swipeCard(width: CGFloat) {
+        switch width {
+        case -500...(-150):
+            print("Card skipped")
+            dragAmount = CGSize(width: -500, height: 0)
+        case 150...500:
+            print("Card answered")
+            dragAmount = CGSize(width: 500, height: 0)
+        default:
+            dragAmount = .zero
+        }
     }
 }
 

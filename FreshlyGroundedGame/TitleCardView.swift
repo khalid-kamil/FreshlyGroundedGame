@@ -48,6 +48,9 @@ struct TitleCardView_Previews: PreviewProvider {
             .previewDisplayName("Title Card")
             .previewLayout(.sizeThatFits)
             .padding()
+            .previewDisplayName("Title Card")
+            .previewLayout(.sizeThatFits)
+            .padding()
     }
 }
 

@@ -82,7 +82,7 @@ struct Deck {
     ]
 }
 
-struct Card {
+struct Card: Hashable {
     let prompt: String
 
     static let example = Card(prompt: "What are you excited to go home to?")
