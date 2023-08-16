@@ -31,9 +31,13 @@ class Game: ObservableObject {
         return currentQuestionNumber() == deck.count
     }
 
-    func nextQuestion() {
+    func nextCard() {
         guard !isLastCard() else {
             endGame()
+            return
+        }
+        guard isStarted else {
+            startNewGame()
             return
         }
         currentQuestionIndex += 1

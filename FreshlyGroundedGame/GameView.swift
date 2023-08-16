@@ -20,13 +20,13 @@ struct GameView: View {
                     SwipeableCard(backgroundColor: .white) {
                         QuestionCardView(content: question.prompt)
                     } completion: {
-                        game.nextQuestion()
+                        game.nextCard()
                     }
                 }
                 SwipeableCard(backgroundColor: Color("Lead")) {
                     TitleCardView()
                 } completion: {
-                    game.nextQuestion()
+                    game.nextCard()
                 }
             }
             .toolbar {
