@@ -14,6 +14,14 @@ class Game: ObservableObject {
         self.state = state
         self.currentQuestionIndex = currentQuestionIndex
         self.fetchedQuestions = deck
+        displayedQuestions = fetchedQuestions
+    }
+
+    func getIndex(question: Question) -> Int {
+        let index = displayedQuestions?.firstIndex(where: { currentQuestion in
+            return question.id == currentQuestion.id
+        }) ?? 0
+        return index
     }
 
     func startGame() {

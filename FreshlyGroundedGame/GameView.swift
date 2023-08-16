@@ -16,15 +16,28 @@ struct GameView: View {
                 LinearGradient(colors: [Color("Inside"), Color("Oregon Grape")], startPoint: .bottom, endPoint: .top)
                     .ignoresSafeArea()
 
-                GameOverCardView(completed: game.completedQuestions) { game.launchGame() }
-
-                ForEach(game.fetchedQuestions, id: \.id) { question in
-                    SwipeableCard(backgroundColor: .white) {
-                        QuestionCardView(content: question.prompt)
-                    } completion: {
-                        game.nextCard()
+                if let questions = game.displayedQuestions {
+                    if questions.isEmpty {
+                        GameOverCardView(completed: game.completedQuestions) { game.launchGame() }
+                    } else {
+                        ForEach(game.fetchedQuestions) { question in
+                            let index = CGFloat(game.getIndex(question: question))
+                            let topOffset = (index <= 2 ? index : 2) * 8
+                            SwipeableCard(backgroundColor: .white) {
+                                QuestionCardView(content: question.prompt)
+                            } completion: {
+                                game.nextCard()
+                            }
+                            .offset(y: -topOffset)
+                        }
                     }
+                } else {
+                    ProgressView()
                 }
+
+
+
+
 
                 SwipeableCard(backgroundColor: Color("Lead")) {
                     InstructionsCardView(content: game.howToPlay)
