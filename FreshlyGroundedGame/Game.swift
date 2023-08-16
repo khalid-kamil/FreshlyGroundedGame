@@ -7,7 +7,7 @@ class Game: ObservableObject {
     private(set) var deck: [Card] = Deck.defaultDeck
     let howToPlay: String = "Be vulnerable. Don't judge."
 
-    init(state: GameState = .launched, currentQuestionIndex: Int = 0, deck: [Card] = Deck.defaultDeck) {
+    init(state: GameState = .launched, currentQuestionIndex: Int = 0, deck: [Card] = Deck.defaultDeck.shuffled()) {
         self.state = state
         self.currentQuestionIndex = currentQuestionIndex
         self.deck = deck
@@ -16,14 +16,12 @@ class Game: ObservableObject {
     func startGame() {
         guard !deck.isEmpty else { return } // TODO: Handle condition and display error if deck is empty
         state = .started
-        currentQuestionIndex = 0
-        deck = Deck.defaultDeck.shuffled()
     }
 
     func launchGame() {
         state = .launched
         currentQuestionIndex = 0
-        deck = Deck.defaultDeck
+        deck = Deck.defaultDeck.shuffled()
     }
 
     func showInstructions() {

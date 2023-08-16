@@ -2,6 +2,8 @@
 import SwiftUI
 
 struct GameOverCardView: View {
+    let action: () -> Void
+
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 16)
@@ -25,11 +27,17 @@ struct GameOverCardView: View {
                     .multilineTextAlignment(.center)
                 Spacer()
                 Spacer()
-                Text("Tap to play again".uppercased())
-                    .font(.title2)
-                    .fontWeight(.bold)
-                    .foregroundColor(.purple)
-                    .multilineTextAlignment(.center)
+                Button {
+                    // TODO: Play again
+                    action()
+                } label: {
+                    Text("Tap to play again".uppercased())
+                        .font(.title2)
+                        .fontWeight(.bold)
+                        .foregroundColor(.purple)
+                        .multilineTextAlignment(.center)
+                }
+
                 // TODO: Add animation to play again
                 Spacer()
             }
@@ -45,6 +53,8 @@ struct GameOverCardView: View {
 
 struct GameOverCardView_Previews: PreviewProvider {
     static var previews: some View {
-        GameOverCardView()
+        GameOverCardView() {
+            print("Restart Game")
+        }
     }
 }
