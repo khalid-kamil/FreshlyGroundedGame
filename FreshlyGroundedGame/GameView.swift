@@ -24,6 +24,12 @@ struct GameView: View {
                     }
                 }
                 SwipeableCard(backgroundColor: Color("Lead")) {
+                    InstructionsCardView(content: game.howToPlay)
+                } completion: {
+                    game.nextCard()
+                }
+
+                SwipeableCard(backgroundColor: Color("Lead")) {
                     TitleCardView()
                 } completion: {
                     game.nextCard()
