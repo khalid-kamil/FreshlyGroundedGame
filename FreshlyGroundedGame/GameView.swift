@@ -17,7 +17,7 @@ struct GameView: View {
                     .ignoresSafeArea()
                 GameOverCardView()
                 ForEach(game.deck, id: \.self) { question in
-                    CardView(content: question.prompt)
+                    QuestionCardView(content: question.prompt)
                 }
             }
             .toolbar {

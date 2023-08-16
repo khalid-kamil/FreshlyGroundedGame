@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CardView: View {
+struct QuestionCardView: View {
     let content: String
 
     @State private var dragAmount = CGSize.zero
@@ -58,7 +58,7 @@ struct CardView: View {
 
 struct CardView_Previews: PreviewProvider {
     static var previews: some View {
-        CardView(content: Card.example.prompt)
+        QuestionCardView(content: Card.example.prompt)
             .previewDisplayName("Question Card")
             .previewLayout(.sizeThatFits)
             .padding()
