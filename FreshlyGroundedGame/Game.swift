@@ -4,7 +4,8 @@ import Foundation
 class Game: ObservableObject {
     @Published var state: GameState
     @Published var currentQuestionIndex: Int
-    private(set) var deck: [Question] = Deck.defaultDeck
+    @Published var displayedQuestions: [Question]?
+    private(set) var fetchedQuestions: [Question] = Deck.defaultDeck
     let howToPlay: String = "Be vulnerable. Don't judge."
 
     var completedQuestions: Int = 0
@@ -12,11 +13,11 @@ class Game: ObservableObject {
     init(state: GameState = .launched, currentQuestionIndex: Int = 0, deck: [Question] = Deck.defaultDeck.shuffled()) {
         self.state = state
         self.currentQuestionIndex = currentQuestionIndex
-        self.deck = deck
+        self.fetchedQuestions = deck
     }
 
     func startGame() {
-        guard !deck.isEmpty else { return } // TODO: Handle condition and display error if deck is empty
+        guard !fetchedQuestions.isEmpty else { return } // TODO: Handle condition and display error if deck is empty
         state = .started
     }
 
@@ -24,7 +25,7 @@ class Game: ObservableObject {
         state = .launched
         currentQuestionIndex = 0
         completedQuestions = 0
-        deck = Deck.defaultDeck.shuffled()
+        fetchedQuestions = Deck.defaultDeck.shuffled()
     }
 
     func showInstructions() {
@@ -32,7 +33,7 @@ class Game: ObservableObject {
     }
 
     var currentQuestion: String {
-        deck[currentQuestionIndex].prompt
+        fetchedQuestions[currentQuestionIndex].prompt
     }
 
     func currentQuestionNumber() -> Int {
@@ -40,11 +41,11 @@ class Game: ObservableObject {
     }
 
     func totalQuestionCount() -> Int {
-        return deck.count
+        return fetchedQuestions.count
     }
 
     func isLastCard() -> Bool {
-        return currentQuestionNumber() == deck.count
+        return currentQuestionNumber() == fetchedQuestions.count
     }
 
     func nextCard() {
