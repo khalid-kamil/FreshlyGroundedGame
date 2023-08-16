@@ -36,10 +36,16 @@ struct GameView: View {
                     } label: {
                         Image(systemName: "arrow.clockwise")
                     }
+                    .scaleEffect(game.isStarted ? 1 : 0.5)
+                    .opacity(game.isStarted ? 1 : 0)
+                    .animation(.interpolatingSpring(stiffness: 100, damping: 10), value: game.isStarted)
 
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Text("\(game.currentQuestionNumber())/\(game.totalQuestionCount())")
+                        .scaleEffect(game.isStarted ? 1 : 0.5)
+                        .opacity(game.isStarted ? 1 : 0)
+                        .animation(.interpolatingSpring(stiffness: 100, damping: 10), value: game.isStarted)
                 }
                 ToolbarItem(placement: .principal) {
                     FGLogo()
