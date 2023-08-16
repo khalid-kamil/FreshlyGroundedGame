@@ -10,11 +10,10 @@ struct QuestionCardView: View {
             .multilineTextAlignment(.center)
             .foregroundColor(.black)
             .padding(40)
-
     }
 }
 
-struct CardView_Previews: PreviewProvider {
+struct QuestionCardView_Previews: PreviewProvider {
     static var previews: some View {
         QuestionCardView(content: Card.example.prompt)
             .previewDisplayName("Question Card")
