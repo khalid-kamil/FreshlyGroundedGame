@@ -19,10 +19,14 @@ struct GameView: View {
                 ForEach(game.deck, id: \.self) { question in
                     SwipeableCard(backgroundColor: .white) {
                         QuestionCardView(content: question.prompt)
+                    } completion: {
+                        game.nextQuestion()
                     }
                 }
                 SwipeableCard(backgroundColor: Color("Lead")) {
                     TitleCardView()
+                } completion: {
+                    game.nextQuestion()
                 }
             }
             .toolbar {
@@ -40,14 +44,6 @@ struct GameView: View {
                 ToolbarItem(placement: .principal) {
                     FGLogo()
                         .frame(width: 80)
-                }
-                ToolbarItem(placement: .bottomBar) {
-                    Button {
-                        game.nextQuestion()
-                    } label: {
-                        Text("Next Question")
-                    }
-
                 }
             }
             .foregroundColor(.white)

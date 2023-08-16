@@ -4,6 +4,7 @@ import SwiftUI
 struct SwipeableCard<Content: View>: View {
     let backgroundColor: Color
     @ViewBuilder let content: Content
+    let completion: () -> Void
 
     @State private var dragAmount = CGSize.zero
 
@@ -31,11 +32,11 @@ struct SwipeableCard<Content: View>: View {
     func swipeCard(width: CGFloat) {
         switch width {
         case -500...(-150):
-            print("Card skipped")
             dragAmount = CGSize(width: -500, height: 0)
+            completion()
         case 150...500:
-            print("Card answered")
             dragAmount = CGSize(width: 500, height: 0)
+            completion()
         default:
             dragAmount = .zero
         }
@@ -44,7 +45,9 @@ struct SwipeableCard<Content: View>: View {
 
 struct SwipeableCard_Previews: PreviewProvider {
     static var previews: some View {
-        SwipeableCard(backgroundColor: .yellow) { Text("Content")}
+        SwipeableCard(backgroundColor: .yellow) { Text("Content") } completion: {
+            print("Card Dismissed")
+        }
             .previewDisplayName("Swipeable Card")
             .previewLayout(.sizeThatFits)
             .padding()
