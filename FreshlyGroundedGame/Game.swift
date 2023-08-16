@@ -7,6 +7,8 @@ class Game: ObservableObject {
     private(set) var deck: [Card] = Deck.defaultDeck
     let howToPlay: String = "Be vulnerable. Don't judge."
 
+    var completedQuestions: Int = 0
+
     init(state: GameState = .launched, currentQuestionIndex: Int = 0, deck: [Card] = Deck.defaultDeck.shuffled()) {
         self.state = state
         self.currentQuestionIndex = currentQuestionIndex
@@ -51,6 +53,7 @@ class Game: ObservableObject {
         case .instructions:
             startGame()
         case .started:
+            completedQuestions += 1
             guard !isLastCard() else {
                 endGame()
                 return

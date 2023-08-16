@@ -2,6 +2,7 @@
 import SwiftUI
 
 struct GameOverCardView: View {
+    let completed: Int
     let action: () -> Void
 
     var body: some View {
@@ -21,7 +22,7 @@ struct GameOverCardView: View {
                     .font(.title3)
                     .fontWeight(.semibold)
                     .multilineTextAlignment(.center)
-                Text("Completed: \(0)")
+                Text("Completed: \(completed)")
                     .font(.title3)
                     .fontWeight(.semibold)
                     .multilineTextAlignment(.center)
@@ -53,7 +54,7 @@ struct GameOverCardView: View {
 
 struct GameOverCardView_Previews: PreviewProvider {
     static var previews: some View {
-        GameOverCardView() {
+        GameOverCardView(completed: 2) {
             print("Restart Game")
         }
     }

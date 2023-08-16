@@ -15,8 +15,8 @@ struct GameView: View {
             ZStack {
                 LinearGradient(colors: [Color("Inside"), Color("Oregon Grape")], startPoint: .bottom, endPoint: .top)
                     .ignoresSafeArea()
-                
-                GameOverCardView(action: { game.launchGame() })
+
+                GameOverCardView(completed: game.completedQuestions) { game.launchGame() }
 
                 ForEach(game.deck, id: \.self) { question in
                     SwipeableCard(backgroundColor: .white) {
