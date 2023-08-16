@@ -4,56 +4,41 @@ import Foundation
 class Game: ObservableObject {
     @Published var state: GameState
     @Published var currentQuestionIndex: Int
-    @Published var displayedQuestions: [Question]?
+    @Published var displayedQuestions: [Question] = []
     private(set) var fetchedQuestions: [Question] = Deck.defaultDeck
     let howToPlay: String = "Be vulnerable. Don't judge."
 
     var completedQuestions: Int = 0
+    var currentQuestionNumber: Int = 0
+    var totalQuestionsCount: Int {
+        fetchedQuestions.count
+    }
 
-    init(state: GameState = .launched, currentQuestionIndex: Int = 0, deck: [Question] = Deck.defaultDeck.shuffled()) {
+    init(state: GameState = .launched, currentQuestionIndex: Int = 0, deck: [Question] = Deck.defaultDeck) {
         self.state = state
         self.currentQuestionIndex = currentQuestionIndex
         self.fetchedQuestions = deck
-        displayedQuestions = fetchedQuestions
-    }
-
-    func getIndex(question: Question) -> Int {
-        let index = displayedQuestions?.firstIndex(where: { currentQuestion in
-            return question.id == currentQuestion.id
-        }) ?? 0
-        return index
+        self.displayedQuestions = self.fetchedQuestions
     }
 
     func startGame() {
-        guard !fetchedQuestions.isEmpty else { return } // TODO: Handle condition and display error if deck is empty
+        guard !displayedQuestions.isEmpty else { return } // TODO: Handle condition and display error if deck is empty
         state = .started
     }
 
     func launchGame() {
         state = .launched
-        currentQuestionIndex = 0
+        currentQuestionNumber = 0
         completedQuestions = 0
-        fetchedQuestions = Deck.defaultDeck.shuffled()
+        displayedQuestions = fetchedQuestions
     }
 
     func showInstructions() {
         state = .instructions
     }
 
-    var currentQuestion: String {
-        fetchedQuestions[currentQuestionIndex].prompt
-    }
-
-    func currentQuestionNumber() -> Int {
-        return currentQuestionIndex + 1
-    }
-
-    func totalQuestionCount() -> Int {
-        return fetchedQuestions.count
-    }
-
     func isLastCard() -> Bool {
-        return currentQuestionNumber() == fetchedQuestions.count
+        return displayedQuestions.count == 1
     }
 
     func nextCard() {
@@ -61,14 +46,21 @@ class Game: ObservableObject {
         case .launched:
             showInstructions()
         case .instructions:
-            startGame()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [weak self] in
+                self?.startGame()
+                self?.currentQuestionNumber += 1
+            }
         case .started:
             completedQuestions += 1
-            guard !isLastCard() else {
-                endGame()
-                return
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [weak self] in
+                if let _ = self?.displayedQuestions.first {
+                    self?.displayedQuestions.removeFirst()
+                    self?.currentQuestionNumber += 1
+                }
             }
-            currentQuestionIndex += 1
+            if isLastCard() {
+                endGame()
+            }
         case .finished:
             launchGame()
         }

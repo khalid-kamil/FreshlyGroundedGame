@@ -1,14 +1,11 @@
-//
-//  ContentView.swift
-//  FreshlyGroundedGame
-//
-//  Created by Khalid Kamil on 12/08/2023.
-//
 
 import SwiftUI
 
 struct GameView: View {
     @ObservedObject var game = Game()
+    var showStartMenu: Bool {
+        return game.state == .launched || game.state == .instructions
+    }
 
     var body: some View {
         NavigationStack {
@@ -16,39 +13,29 @@ struct GameView: View {
                 LinearGradient(colors: [Color("Inside"), Color("Oregon Grape")], startPoint: .bottom, endPoint: .top)
                     .ignoresSafeArea()
 
-                if let questions = game.displayedQuestions {
-                    if questions.isEmpty {
-                        GameOverCardView(completed: game.completedQuestions) { game.launchGame() }
-                    } else {
-                        ForEach(game.fetchedQuestions) { question in
-                            let index = CGFloat(game.getIndex(question: question))
-                            let topOffset = (index <= 2 ? index : 2) * 8
-                            SwipeableCard(backgroundColor: .white) {
-                                QuestionCardView(content: question.prompt)
-                            } completion: {
-                                game.nextCard()
-                            }
-                            .offset(y: -topOffset)
-                        }
+                GameOverCardView(completed: game.completedQuestions) { game.launchGame() }
+
+                ForEach(game.displayedQuestions.reversed()) { question in
+                    SwipeableCard(backgroundColor: .white) {
+                        QuestionCardView(content: question.prompt)
+                    } completion: {
+                        game.nextCard()
                     }
-                } else {
-                    ProgressView()
                 }
 
+                if showStartMenu {
+                    SwipeableCard(backgroundColor: Color("Lead")) {
+                        InstructionsCardView(content: game.howToPlay)
+                    } completion: {
+                        game.nextCard()
+                    }
+                    .animation(.easeOut(duration: 1), value: showStartMenu)
 
-
-
-
-                SwipeableCard(backgroundColor: Color("Lead")) {
-                    InstructionsCardView(content: game.howToPlay)
-                } completion: {
-                    game.nextCard()
-                }
-
-                SwipeableCard(backgroundColor: Color("Lead")) {
-                    TitleCardView()
-                } completion: {
-                    game.nextCard()
+                    SwipeableCard(backgroundColor: Color("Lead")) {
+                        TitleCardView()
+                    } completion: {
+                        game.nextCard()
+                    }
                 }
             }
             .toolbar {
@@ -63,7 +50,7 @@ struct GameView: View {
                     .animation(.interpolatingSpring(stiffness: 100, damping: 10), value: game.state == .started)
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Text("\(game.currentQuestionNumber())/\(game.totalQuestionCount())")
+                    Text("\(game.currentQuestionNumber)/\(game.totalQuestionsCount)")
                         .scaleEffect(game.state == .started ? 1 : 0.5)
                         .opacity(game.state == .started ? 1 : 0)
                         .animation(.interpolatingSpring(stiffness: 100, damping: 10), value: game.state == .started)
