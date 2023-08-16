@@ -29,7 +29,6 @@ struct GameView: View {
                     } completion: {
                         game.nextCard()
                     }
-                    .animation(.easeOut(duration: 1), value: showStartMenu)
 
                     SwipeableCard(backgroundColor: Color("Lead")) {
                         TitleCardView()
