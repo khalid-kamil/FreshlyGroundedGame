@@ -23,6 +23,7 @@ class Game: ObservableObject {
     func launchGame() {
         state = .launched
         currentQuestionIndex = 0
+        completedQuestions = 0
         deck = Deck.defaultDeck.shuffled()
     }
 
