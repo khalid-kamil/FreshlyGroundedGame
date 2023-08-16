@@ -18,7 +18,7 @@ struct GameView: View {
 
                 GameOverCardView(completed: game.completedQuestions) { game.launchGame() }
 
-                ForEach(game.deck, id: \.self) { question in
+                ForEach(game.deck, id: \.id) { question in
                     SwipeableCard(backgroundColor: .white) {
                         QuestionCardView(content: question.prompt)
                     } completion: {

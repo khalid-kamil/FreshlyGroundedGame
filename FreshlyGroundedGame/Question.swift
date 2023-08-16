@@ -2,12 +2,12 @@
 import Foundation
 
 struct Deck {
-    let cards: [Card]
+    let cards: [Question]
     static let defaultDeck = [
-        Card(prompt:"Think about someone in your life that is no longer here. What is one lesson they taught you?"),
-        Card(prompt:"What are you excited to go home to?"),
-        Card(prompt:"What do you know about yourself now that you didn't when you were younger"),
-        Card(prompt:"Do I seem like I'm good at embracing my insecurities?"),
+        Question(prompt:"Think about someone in your life that is no longer here. What is one lesson they taught you?"),
+        Question(prompt:"What are you excited to go home to?"),
+        Question(prompt:"What do you know about yourself now that you didn't when you were younger"),
+        Question(prompt:"Do I seem like I'm good at embracing my insecurities?"),
 //        Card(prompt:"I could improve my relationship with the Qur'an by _."),
 //        Card(prompt:"Tell me something about your mother that you didn't appreciate until you became older."),
 //        Card(prompt:"Tell me something about your father that you didn't appreciate until you became older."),
@@ -82,8 +82,9 @@ struct Deck {
     ]
 }
 
-struct Card: Hashable {
+struct Question: Identifiable {
+    let id = UUID()
     let prompt: String
 
-    static let example = Card(prompt: "What are you excited to go home to?")
+    static let example = Question(prompt: "What are you excited to go home to?")
 }

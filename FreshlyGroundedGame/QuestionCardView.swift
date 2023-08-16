@@ -15,7 +15,7 @@ struct QuestionCardView: View {
 
 struct QuestionCardView_Previews: PreviewProvider {
     static var previews: some View {
-        QuestionCardView(content: Card.example.prompt)
+        QuestionCardView(content: Question.example.prompt)
             .previewDisplayName("Question Card")
             .previewLayout(.sizeThatFits)
             .padding()

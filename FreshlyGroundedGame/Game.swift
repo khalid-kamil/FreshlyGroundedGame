@@ -4,12 +4,12 @@ import Foundation
 class Game: ObservableObject {
     @Published var state: GameState
     @Published var currentQuestionIndex: Int
-    private(set) var deck: [Card] = Deck.defaultDeck
+    private(set) var deck: [Question] = Deck.defaultDeck
     let howToPlay: String = "Be vulnerable. Don't judge."
 
     var completedQuestions: Int = 0
 
-    init(state: GameState = .launched, currentQuestionIndex: Int = 0, deck: [Card] = Deck.defaultDeck.shuffled()) {
+    init(state: GameState = .launched, currentQuestionIndex: Int = 0, deck: [Question] = Deck.defaultDeck.shuffled()) {
         self.state = state
         self.currentQuestionIndex = currentQuestionIndex
         self.deck = deck
