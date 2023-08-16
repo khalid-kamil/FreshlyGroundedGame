@@ -1,55 +1,38 @@
-//
-//  TitleCardView.swift
-//  FreshlyGroundedGame
-//
-//  Created by Khalid Kamil on 15/08/2023.
-//
 
 import SwiftUI
 
 struct TitleCardView: View {
     var body: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 16)
-                .fill(Color("Lead"))
-                .shadow(radius: 5)
+        VStack {
+            Spacer()
+            FGLogo()
+                .frame(width: 140, height: 100)
 
-            VStack {
-                Spacer()
-                FGLogo()
-                    .frame(width: 140, height: 100)
-
-                Text("THE GAME".uppercased())
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .multilineTextAlignment(.center)
-                Spacer()
-                Text("Swipe to open up".uppercased())
-                    .font(.title2)
-                    .fontWeight(.bold)
-                    .foregroundColor(.purple)
-                    .multilineTextAlignment(.center)
-                // TODO: Add animation to swipe text
-                Spacer()
-            }
-            .foregroundColor(.white)
-            .padding(40)
-
-
+            Text("THE GAME".uppercased())
+                .font(.largeTitle)
+                .fontWeight(.bold)
+                .multilineTextAlignment(.center)
+            Spacer()
+            Text("Swipe to open up".uppercased())
+                .font(.title2)
+                .fontWeight(.bold)
+                .foregroundColor(.purple)
+                .multilineTextAlignment(.center)
+            // TODO: Add animation to swipe text
+            Spacer()
         }
-        .padding(32)
-        .aspectRatio(1.0, contentMode: .fit)
+        .foregroundColor(.white)
+        .padding(40)
     }
 }
 
 struct TitleCardView_Previews: PreviewProvider {
     static var previews: some View {
         TitleCardView()
+            .frame(width: 300, height: 300)
             .previewDisplayName("Title Card")
             .previewLayout(.sizeThatFits)
-            .padding()
-            .previewDisplayName("Title Card")
-            .previewLayout(.sizeThatFits)
+            .preferredColorScheme(.dark)
             .padding()
     }
 }

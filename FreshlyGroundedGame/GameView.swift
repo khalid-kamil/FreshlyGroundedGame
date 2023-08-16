@@ -17,7 +17,12 @@ struct GameView: View {
                     .ignoresSafeArea()
                 GameOverCardView()
                 ForEach(game.deck, id: \.self) { question in
-                    QuestionCardView(content: question.prompt)
+                    SwipeableCard(backgroundColor: .white) {
+                        QuestionCardView(content: question.prompt)
+                    }
+                }
+                SwipeableCard(backgroundColor: Color("Lead")) {
+                    TitleCardView()
                 }
             }
             .toolbar {
