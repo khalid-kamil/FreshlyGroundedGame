@@ -2,17 +2,32 @@
 import Foundation
 
 class Game: ObservableObject {
-    @Published var isStarted: Bool = false
-    @Published var currentQuestionIndex: Int = 0
+    @Published var state: GameState
+    @Published var currentQuestionIndex: Int
     private(set) var deck: [Card] = Deck.defaultDeck
     let howToPlay: String = "Be vulnerable. Don't judge."
 
+    init(state: GameState = .launched, currentQuestionIndex: Int = 0, deck: [Card] = Deck.defaultDeck) {
+        self.state = state
+        self.currentQuestionIndex = currentQuestionIndex
+        self.deck = deck
+    }
 
-    func startNewGame() {
+    func startGame() {
         guard !deck.isEmpty else { return } // TODO: Handle condition and display error if deck is empty
-        isStarted = true
+        state = .started
         currentQuestionIndex = 0
         deck = Deck.defaultDeck.shuffled()
+    }
+
+    func launchGame() {
+        state = .launched
+        currentQuestionIndex = 0
+        deck = Deck.defaultDeck
+    }
+
+    func showInstructions() {
+        state = .instructions
     }
 
     var currentQuestion: String {
@@ -32,18 +47,30 @@ class Game: ObservableObject {
     }
 
     func nextCard() {
-        guard !isLastCard() else {
-            endGame()
-            return
+        switch state {
+        case .launched:
+            showInstructions()
+        case .instructions:
+            startGame()
+        case .started:
+            guard !isLastCard() else {
+                endGame()
+                return
+            }
+            currentQuestionIndex += 1
+        case .finished:
+            launchGame()
         }
-        guard isStarted else {
-            startNewGame()
-            return
-        }
-        currentQuestionIndex += 1
     }
 
     func endGame() {
-        isStarted = false
+        state = .finished
     }
+}
+
+enum GameState {
+    case launched
+    case instructions
+    case started
+    case finished
 }

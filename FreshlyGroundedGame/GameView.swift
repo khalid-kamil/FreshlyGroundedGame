@@ -38,20 +38,19 @@ struct GameView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button {
-                        game.startNewGame()
+                        game.startGame()
                     } label: {
                         Image(systemName: "arrow.clockwise")
                     }
-                    .scaleEffect(game.isStarted ? 1 : 0.5)
-                    .opacity(game.isStarted ? 1 : 0)
-                    .animation(.interpolatingSpring(stiffness: 100, damping: 10), value: game.isStarted)
-
+                    .scaleEffect(game.state == .started ? 1 : 0.5)
+                    .opacity(game.state == .started ? 1 : 0)
+                    .animation(.interpolatingSpring(stiffness: 100, damping: 10), value: game.state == .started)
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Text("\(game.currentQuestionNumber())/\(game.totalQuestionCount())")
-                        .scaleEffect(game.isStarted ? 1 : 0.5)
-                        .opacity(game.isStarted ? 1 : 0)
-                        .animation(.interpolatingSpring(stiffness: 100, damping: 10), value: game.isStarted)
+                        .scaleEffect(game.state == .started ? 1 : 0.5)
+                        .opacity(game.state == .started ? 1 : 0)
+                        .animation(.interpolatingSpring(stiffness: 100, damping: 10), value: game.state == .started)
                 }
                 ToolbarItem(placement: .principal) {
                     FGLogo()
