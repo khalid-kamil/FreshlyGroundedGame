@@ -3,6 +3,7 @@ import SwiftUI
 
 struct GameOverCardView: View {
     let completed: Int
+    let skipped: Int
     let action: () -> Void
 
     var body: some View {
@@ -18,7 +19,7 @@ struct GameOverCardView: View {
                     .fontWeight(.bold)
                     .multilineTextAlignment(.center)
                 Spacer()
-                Text("Skipped: \(0)")
+                Text("Skipped: \(skipped)")
                     .font(.title3)
                     .fontWeight(.semibold)
                     .multilineTextAlignment(.center)
@@ -54,7 +55,7 @@ struct GameOverCardView: View {
 
 struct GameOverCardView_Previews: PreviewProvider {
     static var previews: some View {
-        GameOverCardView(completed: 2) {
+        GameOverCardView(completed: 2, skipped: 2) {
             print("Restart Game")
         }
     }

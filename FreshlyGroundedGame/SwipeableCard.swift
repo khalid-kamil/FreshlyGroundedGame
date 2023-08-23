@@ -3,8 +3,9 @@ import SwiftUI
 
 struct SwipeableCard<Content: View>: View {
     let backgroundColor: Color
+    @Binding var direction: SwipeDirection
     @ViewBuilder let content: Content
-    let completion: () -> Void
+    let completion: (SwipeDirection) -> Void
 
     @State private var dragAmount = CGSize.zero
 
@@ -21,22 +22,40 @@ struct SwipeableCard<Content: View>: View {
             .rotationEffect(.degrees(Double(dragAmount.width / 40)))
             .gesture(
                 DragGesture()
-                    .onChanged { dragAmount = $0.translation }
+                    .onChanged {
+                        dragAmount = $0.translation
+                        highlight(width: dragAmount.width)
+                    }
                     .onEnded({ _ in
                         swipeCard(width: dragAmount.width)
+                        direction = .none
                     })
             )
             .animation(.spring(), value: dragAmount)
+    }
+
+    func highlight(width: CGFloat) {
+        switch width {
+        case -500...(-100):
+            direction = .left
+            return
+        case 100...500:
+            direction = .right
+            return
+        default:
+            direction = .none
+            return
+        }
     }
 
     func swipeCard(width: CGFloat) {
         switch width {
         case -500...(-150):
             dragAmount = CGSize(width: -500, height: 0)
-            completion()
+            completion(SwipeDirection.left)
         case 150...500:
             dragAmount = CGSize(width: 500, height: 0)
-            completion()
+            completion(SwipeDirection.right)
         default:
             dragAmount = .zero
         }
@@ -45,7 +64,7 @@ struct SwipeableCard<Content: View>: View {
 
 struct SwipeableCard_Previews: PreviewProvider {
     static var previews: some View {
-        SwipeableCard(backgroundColor: .yellow) { Text("Content") } completion: {
+        SwipeableCard(backgroundColor: .yellow, direction: .constant(SwipeDirection.none)) { Text("Content") } completion: {_ in
             print("Card Dismissed")
         }
             .previewDisplayName("Swipeable Card")

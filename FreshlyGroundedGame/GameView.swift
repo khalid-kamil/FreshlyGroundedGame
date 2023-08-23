@@ -6,6 +6,7 @@ struct GameView: View {
     var showStartMenu: Bool {
         return game.state == .launched || game.state == .instructions
     }
+    @State var swipeDirection: SwipeDirection = .none
 
     var body: some View {
         NavigationStack {
@@ -13,34 +14,11 @@ struct GameView: View {
                 LinearGradient(colors: [Color("Inside"), Color("Oregon Grape")], startPoint: .bottom, endPoint: .top)
                     .ignoresSafeArea()
 
-                Group {
-                    GameOverCardView(completed: game.completedQuestions) { game.launchGame() }
-
-                    ForEach(game.displayedQuestions.reversed()) { question in
-                        SwipeableCard(backgroundColor: .white) {
-                            QuestionCardView(content: question.prompt)
-                        } completion: {
-                            game.nextCard()
-                        }
-                    }
-
-                    if showStartMenu {
-                        SwipeableCard(backgroundColor: Color("Lead")) {
-                            InstructionsCardView(content: game.howToPlay)
-                        } completion: {
-                            game.nextCard()
-                        }
-
-                        SwipeableCard(backgroundColor: Color("Lead")) {
-                            TitleCardView()
-                        } completion: {
-                            game.nextCard()
-                        }
-                    }
-                }
+                cardDeck
             }
-            .overlay(skipOverlay)
             .overlay(nextOverlay)
+            .overlay(skipOverlay)
+            .animation(.spring(), value: swipeDirection)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button {
@@ -78,6 +56,39 @@ struct GameView_Previews: PreviewProvider {
 }
 
 extension GameView {
+    var cardDeck: some View {
+        ZStack {
+            GameOverCardView(completed: game.completedQuestions, skipped: game.skippedQuestions) { game.launchGame() }
+
+            ForEach(game.displayedQuestions.reversed()) { question in
+                SwipeableCard(backgroundColor: .white, direction: $swipeDirection) {
+                    QuestionCardView(content: question.prompt)
+                        .blur(radius: swipeDirection != .none ? 4 : 0)
+                } completion: { direction in
+                    game.nextCard(swipe: direction)
+                }
+            }
+
+            if showStartMenu {
+                SwipeableCard(backgroundColor: Color("Lead"), direction: $swipeDirection) {
+                    InstructionsCardView(content: game.howToPlay)
+                        .blur(radius: swipeDirection != .none ? 4 : 0)
+                } completion: { direction in
+                    game.nextCard(swipe: direction)
+                }
+
+                SwipeableCard(backgroundColor: Color("Lead"), direction: .constant(.none)) {
+                    TitleCardView()
+                        .blur(radius: swipeDirection != .none ? 4 : 0)
+                } completion: { direction in
+                    game.nextCard(swipe: direction)
+                }
+            }
+        }
+    }
+}
+
+extension GameView {
     var skipOverlay: some View {
         HStack {
             ZStack(alignment: .leading) {
@@ -85,14 +96,16 @@ extension GameView {
                     .font(.title)
                     .fontWeight(.semibold)
                     .foregroundColor(.gray)
-                    .opacity(0.6)
                     .padding(.leading, 12)
                 Rectangle()
                     .fill(RadialGradient(gradient: Gradient(colors: [.gray, .clear]), center: UnitPoint(x: -1, y: 0.5), startRadius: 1, endRadius: 360))
+                    .opacity(0.8)
                     .frame(width: 200, height: 800)
             }
-            Spacer()
+
+                Spacer()
         }
+        .opacity(swipeDirection == .left ? 1 : 0)
     }
 
     var nextOverlay: some View {
@@ -103,7 +116,6 @@ extension GameView {
                     .font(.title)
                     .fontWeight(.semibold)
                     .foregroundColor(.green)
-                    .opacity(0.6)
                     .padding(.trailing, 12)
                 Rectangle()
                     .fill(RadialGradient(gradient: Gradient(colors: [.green, .clear]), center: UnitPoint(x: 2, y: 0.5), startRadius: 1, endRadius: 360))
@@ -111,5 +123,6 @@ extension GameView {
                     .frame(width: 200, height: 800)
             }
         }
+        .opacity(swipeDirection == .right ? 1 : 0)
     }
 }

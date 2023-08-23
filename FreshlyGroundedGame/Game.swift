@@ -9,6 +9,7 @@ class Game: ObservableObject {
     let howToPlay: String = "Be vulnerable. Don't judge."
 
     var completedQuestions: Int = 0
+    var skippedQuestions: Int = 0
     var currentQuestionNumber: Int = 0
     var totalQuestionsCount: Int {
         fetchedQuestions.count
@@ -41,7 +42,7 @@ class Game: ObservableObject {
         return displayedQuestions.count == 1
     }
 
-    func nextCard() {
+    func nextCard(swipe: SwipeDirection) {
         switch state {
         case .launched:
             showInstructions()
@@ -51,13 +52,22 @@ class Game: ObservableObject {
                 self?.currentQuestionNumber += 1
             }
         case .started:
-            completedQuestions += 1
+            switch swipe {
+            case .left:
+                skippedQuestions += 1
+            case .right:
+                completedQuestions += 1
+            case .none:
+                return
+            }
+
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [weak self] in
                 if let _ = self?.displayedQuestions.first {
                     self?.displayedQuestions.removeFirst()
                     self?.currentQuestionNumber += 1
                 }
             }
+
             if isLastCard() {
                 endGame()
             }
@@ -76,4 +86,10 @@ enum GameState {
     case instructions
     case started
     case finished
+}
+
+enum SwipeDirection {
+    case left
+    case right
+    case none
 }
