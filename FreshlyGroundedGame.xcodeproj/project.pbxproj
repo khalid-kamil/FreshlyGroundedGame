@@ -7,9 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E90ED64F2A96C25400B69E53 /* FrontTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90ED64E2A96C25400B69E53 /* FrontTestView.swift */; };
 		E90ED6512A97534500B69E53 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90ED6502A97534500B69E53 /* Constants.swift */; };
-		E90ED6532A9757B000B69E53 /* BackTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90ED6522A9757B000B69E53 /* BackTestView.swift */; };
 		E90ED6552A976DA800B69E53 /* CardAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90ED6542A976DA800B69E53 /* CardAnimation.swift */; };
 		E98526A82A8B95F500C1D89D /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98526A72A8B95F500C1D89D /* Question.swift */; };
 		E98526AA2A8BB59100C1D89D /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98526A92A8BB59100C1D89D /* Game.swift */; };
@@ -25,9 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		E90ED64E2A96C25400B69E53 /* FrontTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrontTestView.swift; sourceTree = "<group>"; };
 		E90ED6502A97534500B69E53 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		E90ED6522A9757B000B69E53 /* BackTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackTestView.swift; sourceTree = "<group>"; };
 		E90ED6542A976DA800B69E53 /* CardAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardAnimation.swift; sourceTree = "<group>"; };
 		E98526A72A8B95F500C1D89D /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		E98526A92A8BB59100C1D89D /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
@@ -76,8 +72,6 @@
 				E9C77B662A87C01400A8C156 /* FreshlyGroundedGameApp.swift */,
 				E9C77B682A87C01400A8C156 /* GameView.swift */,
 				E90ED6542A976DA800B69E53 /* CardAnimation.swift */,
-				E90ED64E2A96C25400B69E53 /* FrontTestView.swift */,
-				E90ED6522A9757B000B69E53 /* BackTestView.swift */,
 				E98526AF2A8C19BB00C1D89D /* GameOverCardView.swift */,
 				E98526AD2A8BE79900C1D89D /* QuestionCardView.swift */,
 				E98526AB2A8BDAC000C1D89D /* TitleCardView.swift */,
@@ -175,11 +169,9 @@
 				E9C77B692A87C01400A8C156 /* GameView.swift in Sources */,
 				E98526A82A8B95F500C1D89D /* Question.swift in Sources */,
 				E9C77B672A87C01400A8C156 /* FreshlyGroundedGameApp.swift in Sources */,
-				E90ED6532A9757B000B69E53 /* BackTestView.swift in Sources */,
 				E98526AA2A8BB59100C1D89D /* Game.swift in Sources */,
 				E90ED6552A976DA800B69E53 /* CardAnimation.swift in Sources */,
 				E98526B22A8CDD2B00C1D89D /* SwipeableCard.swift in Sources */,
-				E90ED64F2A96C25400B69E53 /* FrontTestView.swift in Sources */,
 				E98526B02A8C19BB00C1D89D /* GameOverCardView.swift in Sources */,
 				E98526AE2A8BE79900C1D89D /* QuestionCardView.swift in Sources */,
 				E98526AC2A8BDAC000C1D89D /* TitleCardView.swift in Sources */,
