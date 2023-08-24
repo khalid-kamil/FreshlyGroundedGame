@@ -11,8 +11,11 @@ struct GameView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                LinearGradient(colors: [Color("Inside"), Color("Oregon Grape")], startPoint: .bottom, endPoint: .top)
+                Image("background")
+                    .resizable()
+                    .scaledToFill()
                     .ignoresSafeArea()
+                    .blur(radius: 4)
 
                 cardDeck
                     .scaleEffect(game.splashScreenState == .on ? 0 : 1)
