@@ -3,6 +3,7 @@ import Foundation
 
 class Game: ObservableObject {
     @Published var state: GameState
+    @Published var splashScreenState = SplashScreenState.on
     @Published var currentQuestionIndex: Int
     @Published var displayedQuestions: [Question] = []
     private(set) var fetchedQuestions: [Question] = Constants.questions
@@ -20,6 +21,10 @@ class Game: ObservableObject {
         self.currentQuestionIndex = currentQuestionIndex
         self.fetchedQuestions = deck
         self.displayedQuestions = self.fetchedQuestions
+        let splashAnimation = CardAnimation(.spring, duration: 1) {
+            self.splashScreenState = .off
+        }
+        splashAnimation.playAfter(duration: 1.5)
     }
 
     func startGame() {
@@ -92,4 +97,8 @@ enum SwipeDirection {
     case left
     case right
     case none
+}
+
+enum SplashScreenState {
+    case on, off
 }

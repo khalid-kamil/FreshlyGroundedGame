@@ -15,6 +15,8 @@ struct GameView: View {
                     .ignoresSafeArea()
 
                 cardDeck
+                    .scaleEffect(game.splashScreenState == .on ? 0 : 1)
+                    .animation(.interpolatingSpring(stiffness: 20, damping: 5), value: game.splashScreenState)
             }
             .overlay(nextOverlay)
             .overlay(skipOverlay)
