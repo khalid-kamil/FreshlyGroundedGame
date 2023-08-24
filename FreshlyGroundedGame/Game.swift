@@ -5,7 +5,7 @@ class Game: ObservableObject {
     @Published var state: GameState
     @Published var currentQuestionIndex: Int
     @Published var displayedQuestions: [Question] = []
-    private(set) var fetchedQuestions: [Question] = Deck.defaultDeck
+    private(set) var fetchedQuestions: [Question] = Constants.questions
     let howToPlay: String = "Be vulnerable. Don't judge."
 
     var completedQuestions: Int = 0
@@ -15,7 +15,7 @@ class Game: ObservableObject {
         fetchedQuestions.count
     }
 
-    init(state: GameState = .launched, currentQuestionIndex: Int = 0, deck: [Question] = Deck.defaultDeck) {
+    init(state: GameState = .launched, currentQuestionIndex: Int = 0, deck: [Question] = Constants.questions) {
         self.state = state
         self.currentQuestionIndex = currentQuestionIndex
         self.fetchedQuestions = deck

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E90ED64F2A96C25400B69E53 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90ED64E2A96C25400B69E53 /* TestView.swift */; };
+		E90ED6512A97534500B69E53 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90ED6502A97534500B69E53 /* Constants.swift */; };
 		E98526A82A8B95F500C1D89D /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98526A72A8B95F500C1D89D /* Question.swift */; };
 		E98526AA2A8BB59100C1D89D /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98526A92A8BB59100C1D89D /* Game.swift */; };
 		E98526AC2A8BDAC000C1D89D /* TitleCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98526AB2A8BDAC000C1D89D /* TitleCardView.swift */; };
@@ -21,6 +23,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E90ED64E2A96C25400B69E53 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
+		E90ED6502A97534500B69E53 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		E98526A72A8B95F500C1D89D /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		E98526A92A8BB59100C1D89D /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		E98526AB2A8BDAC000C1D89D /* TitleCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCardView.swift; sourceTree = "<group>"; };
@@ -67,10 +71,12 @@
 			children = (
 				E9C77B662A87C01400A8C156 /* FreshlyGroundedGameApp.swift */,
 				E9C77B682A87C01400A8C156 /* GameView.swift */,
+				E90ED64E2A96C25400B69E53 /* TestView.swift */,
 				E98526AF2A8C19BB00C1D89D /* GameOverCardView.swift */,
 				E98526AD2A8BE79900C1D89D /* QuestionCardView.swift */,
 				E98526AB2A8BDAC000C1D89D /* TitleCardView.swift */,
 				E98526A92A8BB59100C1D89D /* Game.swift */,
+				E90ED6502A97534500B69E53 /* Constants.swift */,
 				E98526B32A8CF6D800C1D89D /* InstructionsCardView.swift */,
 				E98526A72A8B95F500C1D89D /* Question.swift */,
 				E98526B12A8CDD2B00C1D89D /* SwipeableCard.swift */,
@@ -159,11 +165,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				E98526B42A8CF6D800C1D89D /* InstructionsCardView.swift in Sources */,
+				E90ED6512A97534500B69E53 /* Constants.swift in Sources */,
 				E9C77B692A87C01400A8C156 /* GameView.swift in Sources */,
 				E98526A82A8B95F500C1D89D /* Question.swift in Sources */,
 				E9C77B672A87C01400A8C156 /* FreshlyGroundedGameApp.swift in Sources */,
 				E98526AA2A8BB59100C1D89D /* Game.swift in Sources */,
 				E98526B22A8CDD2B00C1D89D /* SwipeableCard.swift in Sources */,
+				E90ED64F2A96C25400B69E53 /* TestView.swift in Sources */,
 				E98526B02A8C19BB00C1D89D /* GameOverCardView.swift in Sources */,
 				E98526AE2A8BE79900C1D89D /* QuestionCardView.swift in Sources */,
 				E98526AC2A8BDAC000C1D89D /* TitleCardView.swift in Sources */,
