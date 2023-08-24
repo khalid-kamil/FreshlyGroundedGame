@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		E90ED6512A97534500B69E53 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90ED6502A97534500B69E53 /* Constants.swift */; };
 		E90ED6552A976DA800B69E53 /* CardAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90ED6542A976DA800B69E53 /* CardAnimation.swift */; };
+		E90ED6572A9777C700B69E53 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90ED6562A9777C700B69E53 /* CircularProgressView.swift */; };
 		E98526A82A8B95F500C1D89D /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98526A72A8B95F500C1D89D /* Question.swift */; };
 		E98526AA2A8BB59100C1D89D /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98526A92A8BB59100C1D89D /* Game.swift */; };
 		E98526AC2A8BDAC000C1D89D /* TitleCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98526AB2A8BDAC000C1D89D /* TitleCardView.swift */; };
@@ -25,6 +26,7 @@
 /* Begin PBXFileReference section */
 		E90ED6502A97534500B69E53 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		E90ED6542A976DA800B69E53 /* CardAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardAnimation.swift; sourceTree = "<group>"; };
+		E90ED6562A9777C700B69E53 /* CircularProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
 		E98526A72A8B95F500C1D89D /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		E98526A92A8BB59100C1D89D /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		E98526AB2A8BDAC000C1D89D /* TitleCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCardView.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 				E98526B32A8CF6D800C1D89D /* InstructionsCardView.swift */,
 				E98526A72A8B95F500C1D89D /* Question.swift */,
 				E98526B12A8CDD2B00C1D89D /* SwipeableCard.swift */,
+				E90ED6562A9777C700B69E53 /* CircularProgressView.swift */,
 				E9C77B6A2A87C01600A8C156 /* Assets.xcassets */,
 				E9C77B6C2A87C01600A8C156 /* Preview Content */,
 			);
@@ -174,6 +177,7 @@
 				E98526B22A8CDD2B00C1D89D /* SwipeableCard.swift in Sources */,
 				E98526B02A8C19BB00C1D89D /* GameOverCardView.swift in Sources */,
 				E98526AE2A8BE79900C1D89D /* QuestionCardView.swift in Sources */,
+				E90ED6572A9777C700B69E53 /* CircularProgressView.swift in Sources */,
 				E98526AC2A8BDAC000C1D89D /* TitleCardView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

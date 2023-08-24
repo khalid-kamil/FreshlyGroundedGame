@@ -5,8 +5,10 @@ struct TitleCardView: View {
     var body: some View {
         VStack {
             Spacer()
-            FGLogo()
-                .frame(width: 140, height: 100)
+            Image("FGLogo")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 200, height: 100)
 
             Text("THE GAME".uppercased())
                 .font(.largeTitle)

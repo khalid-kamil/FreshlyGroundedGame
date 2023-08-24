@@ -15,7 +15,10 @@ struct GameView: View {
                     .resizable()
                     .scaledToFill()
                     .ignoresSafeArea()
-                    .blur(radius: 4)
+                    .blur(radius: 6)
+                Color.purple
+                    .opacity(0.3)
+                    .ignoresSafeArea()
 
                 cardDeck
                     .scaleEffect(game.splashScreenState == .on ? 0 : 1)
@@ -25,24 +28,17 @@ struct GameView: View {
             .overlay(skipOverlay)
             .animation(.spring(), value: swipeDirection)
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button {
-                        game.startGame()
-                    } label: {
-                        Image(systemName: "arrow.clockwise")
-                    }
-                    .scaleEffect(game.state == .started ? 1 : 0.5)
-                    .opacity(game.state == .started ? 1 : 0)
-                    .animation(.interpolatingSpring(stiffness: 100, damping: 10), value: game.state == .started)
-                }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Text("\(game.currentQuestionNumber)/\(game.totalQuestionsCount)")
+                    CircularProgressView(value: game.currentQuestionNumber, total: game.totalQuestionsCount)
                         .scaleEffect(game.state == .started ? 1 : 0.5)
+                        .frame(width: 32)
                         .opacity(game.state == .started ? 1 : 0)
                         .animation(.interpolatingSpring(stiffness: 100, damping: 10), value: game.state == .started)
                 }
                 ToolbarItem(placement: .principal) {
-                    FGLogo()
+                    Image("FGLogo")
+                        .resizable()
+                        .scaledToFit()
                         .frame(width: 80)
                 }
             }
@@ -90,6 +86,7 @@ extension GameView {
                 }
             }
         }
+        .frame(width: UIScreen.main.bounds.width)
     }
 }
 
@@ -111,6 +108,7 @@ extension GameView {
                 Spacer()
         }
         .opacity(swipeDirection == .left ? 1 : 0)
+        .frame(width: UIScreen.main.bounds.width)
     }
 
     var nextOverlay: some View {
@@ -129,5 +127,6 @@ extension GameView {
             }
         }
         .opacity(swipeDirection == .right ? 1 : 0)
+        .frame(width: UIScreen.main.bounds.width)
     }
 }
