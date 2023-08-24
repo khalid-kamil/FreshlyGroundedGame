@@ -9,7 +9,7 @@ struct GameView: View {
     @State var swipeDirection: SwipeDirection = .none
 
     var body: some View {
-        NavigationStack {
+        NavigationView {
             ZStack {
                 Image("background")
                     .resizable()
